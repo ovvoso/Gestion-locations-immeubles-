@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Gestion Location Immeubles</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <style>
+        .dashboard {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .card {
+            background-color: white;
+            width: 220px;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card h2 {
+            margin: 0;
+            color: #3498db;
+        }
+        .menu-links {
+            margin-top: 15px;
+        }
+        .menu-links a {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 5px;
+            font-size: 14px;
+        }
+        .menu-links a:hover {
+            background-color: #2980b9;
+        }
+        .alert-error {
+            color: red;
+            margin: 10px 0;
+        }
+        .alert-success {
+            color: green;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{layout/navigation :: nav}"></div>
+
+<!-- Messages d'erreur/succès -->
+<div th:if="${error}" class="alert-error" th:text="${error}"></div>
+<div th:if="${success}" class="alert-success" th:text="${success}"></div>
+
+<h1>🏠 Tableau de bord - Gestion des Locations</h1>
+<p>Bienvenue dans l'application - Vue générale :</p>
+
+<div class="dashboard">
+    <div class="card">
+        <h2 th:text="${totalUtilisateurs}">0</h2>
+        <p>Utilisateurs</p>
+        <div class="menu-links">
+            <a th:href="@{/utilisateurs}">Voir</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 th:text="${totalImmeubles}">0</h2>
+        <p>Immeubles</p>
+        <div class="menu-links">
+            <a th:href="@{/immeubles}">Voir</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 th:text="${totalUnites}">0</h2>
+        <p>Unités</p>
+        <div class="menu-links">
+            <a th:href="@{/unites}">Voir</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2 th:text="${totalPaiements}">0</h2>
+        <p>Paiements</p>
+        <div class="menu-links">
+            <a th:href="@{/paiements}">Voir</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

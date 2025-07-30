@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <title>Liste des contrats</title>
+</head>
+<body>
+<div th:replace="~{layout/navigation :: nav}"></div>
+<h1>Liste des contrats</h1>
+
+<a th:href="@{/contrats/ajouter}">➕ Ajouter un contrat</a>
+<br><br>
+
+<table border="1" cellpadding="8">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Locataire</th>
+        <th>Unité</th>
+        <th>Date début</th>
+        <th>Date fin</th>
+        <th>Montant total</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c : ${contrats}">
+        <td th:text="${c.id}"></td>
+        <td th:text="${c.locataire.nom + ' ' + c.locataire.prenom}"></td>
+        <td th:text="${c.unite.numero}"></td>
+        <td th:text="${c.dateDebut}"></td>
+        <td th:text="${c.dateFin}"></td>
+        <td th:text="${c.montantTotal} + ' FCFA'"></td>
+        <td>
+            <a th:href="@{'/contrats/modifier/' + ${c.id}}">✏️ Modifier</a> |
+            <a th:href="@{'/contrats/supprimer/' + ${c.id}}"
+               onclick="return confirm('Supprimer ce contrat ?')">🗑️ Supprimer</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+/* ======== Style global ======== */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* ======== Titres ======== */
+h1, h2 {
+    color: #2c3e50;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* ======== Boutons ======== */
+button, .btn {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, .btn:hover {
+    background-color: #2980b9;
+}
+
+/* ======== Liens ======== */
+a {
+    text-decoration: none;
+    color: #3498db;
+}
+
+a:hover {
+    color: #1d6fa5;
+}
+
+/* ======== Tableaux ======== */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+table thead {
+    background-color: #3498db;
+    color: white;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* ======== Formulaires ======== */
+form {
+    width: 50%;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+    width: 95%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea {
+    resize: none;
+}
+
+button[type="submit"] {
+    margin-top: 15px;
+    width: 100%;
+}
+
+/* ======== Menu d'accueil ======== */
+.menu {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.menu a {
+    display: inline-block;
+    margin: 10px;
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+.menu a:hover {
+    background-color: #2980b9;
+}
+
+/* ======== Messages d'erreur/succès ======== */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+    text-align: center;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+    text-align: center;
+}

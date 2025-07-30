@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <title>Liste des paiements</title>
+</head>
+<body>
+<div th:replace="~{layout/navigation :: nav}"></div>
+<h1>Liste des paiements</h1>
+
+<a th:href="@{/paiements/ajouter}">➕ Ajouter un paiement</a>
+<br><br>
+
+<table border="1" cellpadding="8">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Contrat</th>
+        <th>Date</th>
+        <th>Montant</th>
+        <th>Statut</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${paiements}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.contrat.id}"></td>
+        <td th:text="${p.datePaiement}"></td>
+        <td th:text="${p.montant} + ' FCFA'"></td>
+        <td th:text="${p.statut}"></td>
+        <td>
+            <a th:href="@{'/paiements/modifier/' + ${p.id}}">✏️ Modifier</a> |
+            <a th:href="@{'/paiements/supprimer/' + ${p.id}}"
+               onclick="return confirm('Supprimer ce paiement ?')">🗑️ Supprimer</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

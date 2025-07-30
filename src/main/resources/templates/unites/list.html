@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <title>Liste des unités</title>
+</head>
+<body>
+<div th:replace="~{layout/navigation :: nav}"></div>
+<h1>Liste des unités de location</h1>
+
+<a th:href="@{/unites/ajouter}">➕ Ajouter une unité</a>
+<br><br>
+
+<table border="1" cellpadding="8">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Numéro</th>
+        <th>Surface</th>
+        <th>Pièces</th>
+        <th>Loyer</th>
+        <th>Statut</th>
+        <th>Immeuble</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="u : ${unites}">
+        <td th:text="${u.id}"></td>
+        <td th:text="${u.numero}"></td>
+        <td th:text="${u.surface} + ' m²'"></td>
+        <td th:text="${u.pieces}"></td>
+        <td th:text="${u.loyer} + ' FCFA'"></td>
+        <td th:text="${u.statut}"></td>
+        <td th:text="${u.immeuble != null ? u.immeuble.nom : 'Non défini'}"></td>
+        <td>
+            <a th:href="@{'/unites/modifier/' + ${u.id}}">✏️ Modifier</a> |
+            <a th:href="@{'/unites/supprimer/' + ${u.id}}"
+               onclick="return confirm('Supprimer cette unité ?')">🗑️ Supprimer</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

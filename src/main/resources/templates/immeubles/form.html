@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <title>Ajouter/Modifier un immeuble</title>
+</head>
+<body>
+<div th:replace="~{layout/navigation :: nav}"></div>
+<h1 th:text="${immeuble.id == null} ? 'Ajouter un immeuble' : 'Modifier un immeuble'"></h1>
+
+<form th:action="@{/immeubles/enregistrer}" th:object="${immeuble}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label>Nom :</label>
+    <input type="text" th:field="*{nom}" required><br><br>
+
+    <label>Adresse :</label>
+    <input type="text" th:field="*{adresse}" required><br><br>
+
+    <label>Description :</label>
+    <textarea th:field="*{description}" rows="3"></textarea><br><br>
+
+    <label>Équipements :</label>
+    <input type="text" th:field="*{equipements}"><br><br>
+
+    <label>Nombre d'unités :</label>
+    <input type="number" th:field="*{nombreUnites}" required><br><br>
+
+    <label>Propriétaire :</label>
+    <select th:field="*{proprietaire.id}">
+        <option value="">-- Sélectionner un propriétaire --</option>
+        <option th:each="p : ${proprietaires}"
+                th:value="${p.id}"
+                th:text="${p.nom + ' ' + p.prenom}"></option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Enregistrer</button>
+    <a th:href="@{/immeubles}">Retour</a>
+</form>
+
+</body>
+</html>

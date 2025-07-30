@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <title>Liste des utilisateurs</title>
+</head>
+<body>
+<div th:replace="~{layout/navigation :: nav}"></div>
+<h1>Liste des utilisateurs</h1>
+
+<a th:href="@{/utilisateurs/ajouter}">➕ Ajouter un utilisateur</a>
+<br><br>
+
+<table border="1" cellpadding="8">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="u : ${utilisateurs}">
+        <td th:text="${u.id}"></td>
+        <td th:text="${u.nom}"></td>
+        <td th:text="${u.prenom}"></td>
+        <td th:text="${u.email}"></td>
+        <td>
+            <a th:href="@{'/utilisateurs/modifier/' + ${u.id}}">✏️ Modifier</a> |
+            <a th:href="@{'/utilisateurs/supprimer/' + ${u.id}}"
+               onclick="return confirm('Supprimer cet utilisateur ?')">🗑️ Supprimer</a>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

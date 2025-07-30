@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <title>Ajouter/Modifier un utilisateur</title>
+</head>
+<body>
+<div th:replace="~{layout/navigation :: nav}"></div>
+<h1 th:text="${utilisateur.id} != null ? 'Modifier un utilisateur' : 'Ajouter un utilisateur'"></h1>
+
+<form th:action="@{/utilisateurs/enregistrer}" th:object="${utilisateur}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label>Nom :</label>
+    <input type="text" th:field="*{nom}" required><br><br>
+
+    <label>Prénom :</label>
+    <input type="text" th:field="*{prenom}" required><br><br>
+
+    <label>Email :</label>
+    <input type="email" th:field="*{email}" required><br><br>
+
+    <label>Mot de passe :</label>
+    <input type="password" th:field="*{motDePasse}" required><br><br>
+
+    <button type="submit">Enregistrer</button>
+    <a th:href="@{/utilisateurs}">Retour</a>
+</form>
+</body>
+</html>

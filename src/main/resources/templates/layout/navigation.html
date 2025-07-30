@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="nav">
+<head>
+    <style>
+        .navbar {
+            background-color: #2c3e50;
+            padding: 15px 0;
+            margin-bottom: 20px;
+        }
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .navbar ul li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .navbar ul li a:hover {
+            background-color: #34495e;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a th:href="@{/}">🏠 Accueil</a></li>
+            <li><a th:href="@{/utilisateurs}">👥 Utilisateurs</a></li>
+            <li><a th:href="@{/immeubles}">🏢 Immeubles</a></li>
+            <li><a th:href="@{/unites}">🏠 Unités</a></li>
+            <li><a th:href="@{/contrats}">📄 Contrats</a></li>
+            <li><a th:href="@{/paiements}">💰 Paiements</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
