@@ -7,37 +7,42 @@
 </head>
 <body>
 <div th:replace="~{layout/navigation :: nav}"></div>
-<h1>Liste des paiements</h1>
-
-<a th:href="@{/paiements/ajouter}">➕ Ajouter un paiement</a>
-<br><br>
-
-<table border="1" cellpadding="8">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Contrat</th>
-        <th>Date</th>
-        <th>Montant</th>
-        <th>Statut</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="p : ${paiements}">
-        <td th:text="${p.id}"></td>
-        <td th:text="${p.contrat.id}"></td>
-        <td th:text="${p.datePaiement}"></td>
-        <td th:text="${p.montant} + ' FCFA'"></td>
-        <td th:text="${p.statut}"></td>
-        <td>
-            <a th:href="@{'/paiements/modifier/' + ${p.id}}">✏️ Modifier</a> |
-            <a th:href="@{'/paiements/supprimer/' + ${p.id}}"
-               onclick="return confirm('Supprimer ce paiement ?')">🗑️ Supprimer</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <div class="header">
+        <h1>Liste des paiements</h1>
+    </div>
+    <div style="margin-bottom:1.5rem;">
+        <a th:href="@{/paiements/ajouter}" class="btn">➕ Ajouter un paiement</a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Contrat</th>
+            <th>Date</th>
+            <th>Montant</th>
+            <th>Statut</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${paiements}">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.contrat.id}"></td>
+            <td th:text="${p.datePaiement}"></td>
+            <td th:text="${p.montant} + ' FCFA'"></td>
+            <td th:text="${p.statut}"></td>
+            <td class="table-actions">
+                <a th:href="@{'/paiements/modifier/' + ${p.id}}" class="btn">✏️ Modifier</a>
+                <a th:href="@{'/paiements/supprimer/' + ${p.id}}" class="btn btn-danger" onclick="return confirm('Supprimer ce paiement ?')">🗑️ Supprimer</a>
+            </td>
+        </tr>
+        <tr th:if="${paiements.size()} == 0">
+            <td colspan="6" class="empty-message">Aucun paiement trouvé.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

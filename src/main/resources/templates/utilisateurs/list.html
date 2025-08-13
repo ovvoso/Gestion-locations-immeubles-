@@ -7,36 +7,40 @@
 </head>
 <body>
 <div th:replace="~{layout/navigation :: nav}"></div>
-<h1>Liste des utilisateurs</h1>
-
-<a th:href="@{/utilisateurs/ajouter}">➕ Ajouter un utilisateur</a>
-<br><br>
-
-<table border="1" cellpadding="8">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Email</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="u : ${utilisateurs}">
-        <td th:text="${u.id}"></td>
-        <td th:text="${u.nom}"></td>
-        <td th:text="${u.prenom}"></td>
-        <td th:text="${u.email}"></td>
-        <td>
-            <a th:href="@{'/utilisateurs/modifier/' + ${u.id}}">✏️ Modifier</a> |
-            <a th:href="@{'/utilisateurs/supprimer/' + ${u.id}}"
-               onclick="return confirm('Supprimer cet utilisateur ?')">🗑️ Supprimer</a>
-        </td>
-
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <div class="header">
+        <h1>Liste des utilisateurs</h1>
+    </div>
+    <div style="margin-bottom:1.5rem;">
+        <a th:href="@{/utilisateurs/ajouter}" class="btn">➕ Ajouter un utilisateur</a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="u : ${utilisateurs}">
+            <td th:text="${u.id}"></td>
+            <td th:text="${u.nom}"></td>
+            <td th:text="${u.prenom}"></td>
+            <td th:text="${u.email}"></td>
+            <td class="table-actions">
+                <a th:href="@{'/utilisateurs/modifier/' + ${u.id}}" class="btn">✏️ Modifier</a>
+                <a th:href="@{'/utilisateurs/supprimer/' + ${u.id}}" class="btn btn-danger" onclick="return confirm('Supprimer cet utilisateur ?')">🗑️ Supprimer</a>
+            </td>
+        </tr>
+        <tr th:if="${utilisateurs.size()} == 0">
+            <td colspan="5" class="empty-message">Aucun utilisateur trouvé.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

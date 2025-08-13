@@ -7,35 +7,40 @@
 </head>
 <body>
 <div th:replace="~{layout/navigation :: nav}"></div>
-<h1>Liste des immeubles</h1>
-
-<a th:href="@{/immeubles/ajouter}">➕ Ajouter un immeuble</a>
-<br><br>
-
-<table border="1" cellpadding="8">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Nom</th>
-        <th>Adresse</th>
-        <th>Propriétaire</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="i : ${immeubles}">
-        <td th:text="${i.id}"></td>
-        <td th:text="${i.nom}"></td>
-        <td th:text="${i.adresse}"></td>
-        <td th:text="${i.proprietaire != null ? i.proprietaire.nom : 'Aucun'}"></td>
-        <td>
-            <a th:href="@{'/immeubles/modifier/' + ${i.id}}">✏️ Modifier</a> |
-            <a th:href="@{'/immeubles/supprimer/' + ${i.id}}"
-               onclick="return confirm('Supprimer cet immeuble ?')">🗑️ Supprimer</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <div class="header">
+        <h1>Liste des immeubles</h1>
+    </div>
+    <div style="margin-bottom:1.5rem;">
+        <a th:href="@{/immeubles/ajouter}" class="btn">➕ Ajouter un immeuble</a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Adresse</th>
+            <th>Propriétaire</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="i : ${immeubles}">
+            <td th:text="${i.id}"></td>
+            <td th:text="${i.nom}"></td>
+            <td th:text="${i.adresse}"></td>
+            <td th:text="${i.proprietaire != null ? i.proprietaire.nom : 'Aucun'}"></td>
+            <td class="table-actions">
+                <a th:href="@{'/immeubles/modifier/' + ${i.id}}" class="btn">✏️ Modifier</a>
+                <a th:href="@{'/immeubles/supprimer/' + ${i.id}}" class="btn btn-danger" onclick="return confirm('Supprimer cet immeuble ?')">🗑️ Supprimer</a>
+            </td>
+        </tr>
+        <tr th:if="${immeubles.size()} == 0">
+            <td colspan="5" class="empty-message">Aucun immeuble trouvé.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

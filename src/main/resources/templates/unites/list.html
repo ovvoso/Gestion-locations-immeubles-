@@ -7,41 +7,46 @@
 </head>
 <body>
 <div th:replace="~{layout/navigation :: nav}"></div>
-<h1>Liste des unités de location</h1>
-
-<a th:href="@{/unites/ajouter}">➕ Ajouter une unité</a>
-<br><br>
-
-<table border="1" cellpadding="8">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Numéro</th>
-        <th>Surface</th>
-        <th>Pièces</th>
-        <th>Loyer</th>
-        <th>Statut</th>
-        <th>Immeuble</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="u : ${unites}">
-        <td th:text="${u.id}"></td>
-        <td th:text="${u.numero}"></td>
-        <td th:text="${u.surface} + ' m²'"></td>
-        <td th:text="${u.pieces}"></td>
-        <td th:text="${u.loyer} + ' FCFA'"></td>
-        <td th:text="${u.statut}"></td>
-        <td th:text="${u.immeuble != null ? u.immeuble.nom : 'Non défini'}"></td>
-        <td>
-            <a th:href="@{'/unites/modifier/' + ${u.id}}">✏️ Modifier</a> |
-            <a th:href="@{'/unites/supprimer/' + ${u.id}}"
-               onclick="return confirm('Supprimer cette unité ?')">🗑️ Supprimer</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="container">
+    <div class="header">
+        <h1>Liste des unités de location</h1>
+    </div>
+    <div style="margin-bottom:1.5rem;">
+        <a th:href="@{/unites/ajouter}" class="btn">➕ Ajouter une unité</a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Numéro</th>
+            <th>Surface</th>
+            <th>Pièces</th>
+            <th>Loyer</th>
+            <th>Statut</th>
+            <th>Immeuble</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="u : ${unites}">
+            <td th:text="${u.id}"></td>
+            <td th:text="${u.numero}"></td>
+            <td th:text="${u.surface} + ' m²'"></td>
+            <td th:text="${u.pieces}"></td>
+            <td th:text="${u.loyer} + ' FCFA'"></td>
+            <td th:text="${u.statut}"></td>
+            <td th:text="${u.immeuble != null ? u.immeuble.nom : 'Non défini'}"></td>
+            <td class="table-actions">
+                <a th:href="@{'/unites/modifier/' + ${u.id}}" class="btn">✏️ Modifier</a>
+                <a th:href="@{'/unites/supprimer/' + ${u.id}}" class="btn btn-danger" onclick="return confirm('Supprimer cette unité ?')">🗑️ Supprimer</a>
+            </td>
+        </tr>
+        <tr th:if="${unites.size()} == 0">
+            <td colspan="8" class="empty-message">Aucune unité trouvée.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

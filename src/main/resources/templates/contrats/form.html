@@ -7,37 +7,44 @@
 </head>
 <body>
 <div th:replace="~{layout/navigation :: nav}"></div>
-<h1 th:text="${contrat.id == null} ? 'Ajouter un contrat' : 'Modifier un contrat'"></h1>
-
-<form th:action="@{/contrats/enregistrer}" th:object="${contrat}" method="post">
-    <input type="hidden" th:field="*{id}" />
-
-    <label>Locataire :</label>
-    <select th:field="*{locataire.id}" required>
-        <option value="">-- Sélectionner --</option>
-        <option th:each="l : ${locataires}" th:value="${l.id}" th:text="${l.nom + ' ' + l.prenom}"></option>
-    </select>
-    <br><br>
-
-    <label>Unité :</label>
-    <select th:field="*{unite.id}" required>
-        <option value="">-- Sélectionner --</option>
-        <option th:each="u : ${unites}" th:value="${u.id}" th:text="${u.numero}"></option>
-    </select>
-    <br><br>
-
-    <label>Date début :</label>
-    <input type="date" th:field="*{dateDebut}" required><br><br>
-
-    <label>Date fin :</label>
-    <input type="date" th:field="*{dateFin}" required><br><br>
-
-    <label>Montant total (FCFA) :</label>
-    <input type="number" step="0.01" th:field="*{montantTotal}" required><br><br>
-
-    <button type="submit">Enregistrer</button>
-    <a th:href="@{/contrats}">Retour</a>
-</form>
+<div class="container">
+    <div class="header">
+        <h1 th:text="${contrat.id == null} ? 'Ajouter un contrat' : 'Modifier un contrat'"></h1>
+    </div>
+    <form th:action="@{/contrats/enregistrer}" th:object="${contrat}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div class="form-group">
+            <label>Locataire :</label>
+            <select th:field="*{locataire.id}" required>
+                <option value="">-- Sélectionner --</option>
+                <option th:each="l : ${locataires}" th:value="${l.id}" th:text="${l.nom + ' ' + l.prenom}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Unité :</label>
+            <select th:field="*{unite.id}" required>
+                <option value="">-- Sélectionner --</option>
+                <option th:each="u : ${unites}" th:value="${u.id}" th:text="${u.numero}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Date début :</label>
+            <input type="date" th:field="*{dateDebut}" required>
+        </div>
+        <div class="form-group">
+            <label>Date fin :</label>
+            <input type="date" th:field="*{dateFin}" required>
+        </div>
+        <div class="form-group">
+            <label>Montant total (FCFA) :</label>
+            <input type="number" step="0.01" th:field="*{montantTotal}" required>
+        </div>
+        <div class="form-actions">
+            <button type="submit">Enregistrer</button>
+            <a th:href="@{/contrats}" class="btn">Retour</a>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>

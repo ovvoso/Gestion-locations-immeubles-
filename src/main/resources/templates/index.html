@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard - Gestion Location Immeubles</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <style>
         .dashboard {
@@ -53,6 +52,8 @@
             margin: 10px 0;
         }
     </style>
+    <title>Dashboard - Gestion Location Immeubles</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
 <div th:replace="~{layout/navigation :: nav}"></div>
@@ -61,39 +62,56 @@
 <div th:if="${error}" class="alert-error" th:text="${error}"></div>
 <div th:if="${success}" class="alert-success" th:text="${success}"></div>
 
-<h1>🏠 Tableau de bord - Gestion des Locations</h1>
-<p>Bienvenue dans l'application - Vue générale :</p>
-
-<div class="dashboard">
-    <div class="card">
-        <h2 th:text="${totalUtilisateurs}">0</h2>
-        <p>Utilisateurs</p>
-        <div class="menu-links">
-            <a th:href="@{/utilisateurs}">Voir</a>
-        </div>
+<div class="container">
+    <div class="header">
+        <h1>🏠 Tableau de bord - Gestion des Locations</h1>
+        <p>Bienvenue dans l'application - Vue générale :</p>
     </div>
-
-    <div class="card">
-        <h2 th:text="${totalImmeubles}">0</h2>
-        <p>Immeubles</p>
-        <div class="menu-links">
-            <a th:href="@{/immeubles}">Voir</a>
+    <div class="dashboard">
+        <div class="card">
+            <div class="icon">👤</div>
+            <div class="count" th:text="${totalUtilisateurs}">0</div>
+            <div class="card-title">Utilisateurs</div>
+            <div class="card-actions">
+                <a th:href="@{/utilisateurs}" class="btn">Voir</a>
+                <a th:href="@{/utilisateurs/ajouter}" class="btn btn-success">Ajouter</a>
+            </div>
         </div>
-    </div>
-
-    <div class="card">
-        <h2 th:text="${totalUnites}">0</h2>
-        <p>Unités</p>
-        <div class="menu-links">
-            <a th:href="@{/unites}">Voir</a>
+        <div class="card">
+            <div class="icon">🏢</div>
+            <div class="count" th:text="${totalImmeubles}">0</div>
+            <div class="card-title">Immeubles</div>
+            <div class="card-actions">
+                <a th:href="@{/immeubles}" class="btn">Voir</a>
+                <a th:href="@{/immeubles/ajouter}" class="btn btn-success">Ajouter</a>
+            </div>
         </div>
-    </div>
-
-    <div class="card">
-        <h2 th:text="${totalPaiements}">0</h2>
-        <p>Paiements</p>
-        <div class="menu-links">
-            <a th:href="@{/paiements}">Voir</a>
+        <div class="card">
+            <div class="icon">🏠</div>
+            <div class="count" th:text="${totalUnites}">0</div>
+            <div class="card-title">Unités</div>
+            <div class="card-actions">
+                <a th:href="@{/unites}" class="btn">Voir</a>
+                <a th:href="@{/unites/ajouter}" class="btn btn-success">Ajouter</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="icon">💳</div>
+            <div class="count" th:text="${totalPaiements}">0</div>
+            <div class="card-title">Paiements</div>
+            <div class="card-actions">
+                <a th:href="@{/paiements}" class="btn">Voir</a>
+                <a th:href="@{/paiements/ajouter}" class="btn btn-success">Ajouter</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="icon">📄</div>
+            <div class="count" th:text="${totalContrats}">0</div>
+            <div class="card-title">Contrats</div>
+            <div class="card-actions">
+                <a th:href="@{/contrats}" class="btn">Voir</a>
+                <a th:href="@{/contrats/ajouter}" class="btn btn-success">Ajouter</a>
+            </div>
         </div>
     </div>
 </div>
