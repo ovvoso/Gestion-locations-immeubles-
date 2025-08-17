@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport Immeubles</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #fff; color: #222; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        h1, h2 { color: #2563eb; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background: #f3f4f6; }
+        .nodata { color: #ef4444; font-weight: bold; margin: 20px 0; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Rapport Immeubles</h1>
+        <p>Date de génération : <span th:text="${#temporals.format(#dates.createNow(), 'dd/MM/yyyy HH:mm')}"></span></p>
+    </div>
+    <h2>Statistiques</h2>
+    <ul>
+        <li>Total immeubles : <span th:text="${totalImmeubles}"></span></li>
+        <li>Total unités : <span th:text="${totalUnites}"></span></li>
+    </ul>
+    <canvas id="immeubleChart" width="400" height="180"></canvas>
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+    var immeubleLabels = /*[[${immeubleLabels}]]*/ [];
+    var immeubleData = /*[[${immeubleData}]]*/ [];
+    new Chart(document.getElementById('immeubleChart'), {
+            type: 'bar',
+            data: {
+                labels: immeubleLabels,
+                datasets: [{
+                    label: 'Unités par immeuble',
+                    data: immeubleData,
+                    backgroundColor: '#2563eb'
+                }]
+            },
+            options: {responsive: true, plugins: {legend: {display: false}}}
+        });
+        /*]]>*/
+    </script>
+    <h2>Liste des immeubles</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Adresse</th>
+            <th>Nombre d'unités</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${empty}"><td colspan="3" class="nodata">Aucune donnée disponible</td></tr>
+        <tr th:each="i : ${immeubles}" th:unless="${empty}">
+            <td th:text="${i.nom}"></td>
+            <td th:text="${i.adresse}"></td>
+            <td th:text="${i.nombreUnites}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

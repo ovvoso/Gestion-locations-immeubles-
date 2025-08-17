@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapports</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #fff; color: #222; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        h1, h2 { color: #2563eb; }
+        .dashboard { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 2rem; }
+        .card { background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); padding: 18px; width: 200px; text-align: center; }
+        .card-title { font-weight: bold; margin: 10px 0; }
+        .btn { background: #2563eb; color: #fff; border: none; border-radius: 4px; padding: 7px 14px; cursor: pointer; text-decoration: none; margin: 2px; }
+        .btn-success { background: #22c55e; }
+        .btn:hover { background: #1749b1; }
+        .btn-success:hover { background: #15803d; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background: #f3f4f6; }
+        .empty-message { color: #ef4444; font-weight: bold; text-align: center; }
+    </style>
+</head>
+<body>
+<div th:replace="~{layout/navigation :: nav}"></div>
+<div class="container">
+    <div class="header">
+        <h1>Rapports</h1>
+    </div>
+    <div class="dashboard">
+        <div class="card">
+            <div class="icon">🏢</div>
+            <div class="card-title">Immeubles</div>
+            <div class="card-actions">
+                <form th:action="@{/rapports/generate/IMMEUBLES}" method="post" style="display:inline;">
+                    <button type="submit" class="btn">Générer</button>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <div class="icon">🏠</div>
+            <div class="card-title">Unités</div>
+            <div class="card-actions">
+                <form th:action="@{/rapports/generate/UNITES}" method="post" style="display:inline;">
+                    <button type="submit" class="btn">Générer</button>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <div class="icon">📄</div>
+            <div class="card-title">Contrats</div>
+            <div class="card-actions">
+                <form th:action="@{/rapports/generate/CONTRATS}" method="post" style="display:inline;">
+                    <button type="submit" class="btn">Générer</button>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <div class="icon">💳</div>
+            <div class="card-title">Paiements</div>
+            <div class="card-actions">
+                <form th:action="@{/rapports/generate/PAIEMENTS}" method="post" style="display:inline;">
+                    <button type="submit" class="btn">Générer</button>
+                </form>
+            </div>
+        </div>
+        <div class="card">
+            <div class="icon">👤</div>
+            <div class="card-title">Utilisateurs</div>
+            <div class="card-actions">
+                <form th:action="@{/rapports/generate/UTILISATEURS}" method="post" style="display:inline;">
+                    <button type="submit" class="btn">Générer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <h2 style="margin-top:2rem;">Historique des rapports générés</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Généré par</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${rapports.size()} == 0">
+            <td colspan="5" class="empty-message">Aucun rapport généré pour le moment.</td>
+        </tr>
+        <tr th:each="r : ${rapports}" th:unless="${rapports.size()} == 0">
+            <td th:text="${r.filename}"></td>
+            <td th:text="${r.type}"></td>
+            <td th:text="${#temporals.format(r.generatedAt, 'dd/MM/yyyy HH:mm')}"></td>
+            <td th:text="${r.generatedBy}"></td>
+            <td class="table-actions">
+                <a th:href="@{'/rapports/preview/' + ${r.id}}" class="btn">Prévisualiser</a>
+                <a th:href="@{'/rapports/download/' + ${r.id}}" class="btn btn-success">Télécharger</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

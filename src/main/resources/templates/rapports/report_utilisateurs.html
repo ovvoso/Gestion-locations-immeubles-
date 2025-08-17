@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport Utilisateurs</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #fff; color: #222; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        h1, h2 { color: #2563eb; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background: #f3f4f6; }
+        .nodata { color: #ef4444; font-weight: bold; margin: 20px 0; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Rapport Utilisateurs</h1>
+        <p>Date de génération : <span th:text="${#temporals.format(#dates.createNow(), 'dd/MM/yyyy HH:mm')}"></span></p>
+    </div>
+    <h2>Statistiques</h2>
+    <ul>
+        <li>Total utilisateurs : <span th:text="${totalUtilisateurs}"></span></li>
+    </ul>
+    <canvas id="userChart" width="400" height="180"></canvas>
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+    var userLabels = /*[[${userLabels}]]*/ [];
+    var userData = /*[[${userData}]]*/ [];
+    new Chart(document.getElementById('userChart'), {
+            type: 'pie',
+            data: {
+                labels: userLabels,
+                datasets: [{
+                    label: 'Répartition',
+                    data: userData,
+                    backgroundColor: ['#2563eb', '#22c55e', '#ef4444', '#facc15']
+                }]
+            },
+            options: {responsive: true}
+        });
+        /*]]>*/
+    </script>
+    <h2>Liste des utilisateurs</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${empty}"><td colspan="3" class="nodata">Aucune donnée disponible</td></tr>
+        <tr th:each="u : ${utilisateurs}" th:unless="${empty}">
+            <td th:text="${u.nom}"></td>
+            <td th:text="${u.prenom}"></td>
+            <td th:text="${u.email}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

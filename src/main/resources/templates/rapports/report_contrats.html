@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapport Contrats</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #fff; color: #222; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        h1, h2 { color: #2563eb; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background: #f3f4f6; }
+        .nodata { color: #ef4444; font-weight: bold; margin: 20px 0; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>Rapport Contrats</h1>
+        <p>Date de génération : <span th:text="${#temporals.format(#dates.createNow(), 'dd/MM/yyyy HH:mm')}"></span></p>
+    </div>
+    <h2>Statistiques</h2>
+    <ul>
+        <li>Total contrats : <span th:text="${totalContrats}"></span></li>
+        <li>Contrats actifs : <span th:text="${totalActifs}"></span></li>
+    </ul>
+    <canvas id="contratChart" width="400" height="180"></canvas>
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+    var contratLabels = /*[[${contratLabels}]]*/ [];
+    var contratData = /*[[${contratData}]]*/ [];
+    new Chart(document.getElementById('contratChart'), {
+            type: 'doughnut',
+            data: {
+                labels: contratLabels,
+                datasets: [{
+                    label: 'Répartition',
+                    data: contratData,
+                    backgroundColor: ['#2563eb', '#22c55e', '#ef4444', '#facc15']
+                }]
+            },
+            options: {responsive: true}
+        });
+        /*]]>*/
+    </script>
+    <h2>Liste des contrats</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Locataire</th>
+            <th>Unité</th>
+            <th>Date début</th>
+            <th>Date fin</th>
+            <th>Montant</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${empty}"><td colspan="5" class="nodata">Aucune donnée disponible</td></tr>
+        <tr th:each="c : ${contrats}" th:unless="${empty}">
+            <td th:text="${c.locataire.nom + ' ' + c.locataire.prenom}"></td>
+            <td th:text="${c.unite.numero}"></td>
+            <td th:text="${c.dateDebut}"></td>
+            <td th:text="${c.dateFin}"></td>
+            <td th:text="${c.montantTotal}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
